@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Celular Iphone 12",
+    "thumbnail": 20423,
+    "description": "Iphone 12 con cable y auriculares",
+    "code": 1234567,
+    "photo": "www.google.com",
+    "price": 5000,
+    "stock": 11
+  },
+  {
+    "id": 2,
+    "name": "Celular Iphone 12",
+    "thumbnail": 20423,
+    "description": "Iphone 12 con cable y auriculares",
+    "code": 1234567,
+    "photo": "www.google.com",
+    "price": 5000,
+    "stock": 11
+  },
+  {
+    "id": 3,
+    "name": "Celular Iphone 12",
+    "thumbnail": 20423,
+    "description": "Iphone 12 con cable y auriculares",
+    "code": 1234567,
+    "photo": "www.instagram.com",
+    "price": 2000,
+    "stock": 11
+  }
+]
