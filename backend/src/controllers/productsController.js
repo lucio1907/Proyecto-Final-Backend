@@ -47,7 +47,9 @@ const createProduct = async (req, res) => {
         return res.status(400).json({ msg: error.message });
       }
 
-      return res.json({ msg: "Product Added", newProduct });
+      if (process.env.DB_CONNECTION === "firestore") return res.json({ msg: "Product Added!", newProduct: req.body });
+
+      return res.json({ msg: "Product Added!", newProduct });
     } else {
       userUnauthorized(res);
     }
@@ -68,7 +70,7 @@ const updateProduct = async (req, res) => {
       return res.status(404).json({ msg: error.message });
     }
 
-    return res.json({ msg: "Product upgraded", productUpdated: doc });
+    return res.json({ msg: "Product updated!", productUpdated: doc });
   } catch (error) {
     console.error(`❌ Error: ${error}`);
   }
@@ -76,7 +78,7 @@ const updateProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
-  const product = await manager.getOneElement(id)
+  const product = await manager.getOneElement(id);
 
   try {
     // Chequear el admin
@@ -84,7 +86,12 @@ const deleteProduct = async (req, res) => {
       const productDeleted = await manager.delete(id);
 
       if (productDeleted.deletedCount === 0) {
-        const error = new Error("The product does'nt exist");
+        const error = new Error("The product doesn't exist");
+        return res.status(404).json({ msg: error.message });
+      }
+
+      if (process.env.DB_CONNECTION === "firestore" && !product) {
+        const error = new Error("The product doesn't exist");
         return res.status(404).json({ msg: error.message });
       }
 

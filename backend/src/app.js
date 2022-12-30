@@ -2,11 +2,22 @@ import express from 'express';
 import productsRouter from './router/products.routes.js';
 import cartRouter from './router/cart.routes.js';
 import connectionDB from './config/db.js';
+import connectionFirestore from './db/firestoreconnection.js';
 
 const app = express();
 
 // Conexión a la base
-connectionDB();
+switch (process.env.DB_CONNECTION) {
+    case "mongodb":
+        connectionDB();
+        break;
+    case "firestore":
+        connectionFirestore();
+        console.log("Firestore running 🔥");
+        break;
+    default:
+        break;
+}
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
