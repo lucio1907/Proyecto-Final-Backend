@@ -40,6 +40,7 @@ You can see the Deployment in: https://glitch.com/edit/#!/continuous-salty-dogsl
 ## Technologies (for the moment) 🔧
 
 **Server:** Node, Express
+**Databases: ** MongoDB, Firebase
 
 
 
