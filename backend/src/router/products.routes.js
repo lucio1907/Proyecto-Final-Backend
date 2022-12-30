@@ -1,51 +1,16 @@
-const express = require("express");
-const ProductManager = require("../controllers/products.manager.js");
-const userUnauthorized = require("../helpers/unauthorizedFunction.js");
+import express from 'express';
+import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/productsController.js';
 
 const productsRouter = express.Router();
-const manager = new ProductManager();
 
-const isAdmin = true;
+productsRouter.get("/", getAllProducts);
 
-productsRouter.get("/", (req, res) => {
-  const result = manager.findAll();
-  res.status(result.status).json(result);
-});
+productsRouter.get("/:id", getProductById);
 
-productsRouter.get("/:id", (req, res) => {
-  let result = manager.findById(req.params.id);
-  res.status(result.status).json(result);
-});
+productsRouter.post("/", createProduct);
 
-productsRouter.post("/", (req, res) => {
-  const newProduct = req.body;
+productsRouter.put("/:id", updateProduct);
 
-  // Chequear el admin
-  if (isAdmin) {
-      let result = manager.create(newProduct);
-      result.then(data => res.status(data.status).json(data)); 
-  } else {
-    userUnauthorized(res);
-  }
-});
+productsRouter.delete("/:id", deleteProduct);
 
-productsRouter.put("/:id", (req, res) => {
-  let result = manager.update(req.params.id, req.body);
-  result.then(data => res.status(data.status).json(data));
-});
-
-productsRouter.delete("/:id", (req, res) => {
-  const { id } = req.params;
-
-  // Chequear el admin
-  if (isAdmin) {
-    // Nuevo array sin el producto eliminado
-    const result = manager.delete(id);
-
-    res.status(result.status).json(result);
-  } else {
-    userUnauthorized(res);
-  }
-});
-
-module.exports = productsRouter;
+export default productsRouter;

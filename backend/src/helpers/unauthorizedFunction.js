@@ -3,4 +3,4 @@ const userUnauthorized = (res) => {
     return res.status(401).json({ msg: error.message });
 }
 
-module.exports = userUnauthorized;
+export default userUnauthorized;

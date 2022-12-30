@@ -1,38 +1,16 @@
-const express = require('express');
-const CartManager = require('../controllers/cart.manager.js');
+import express from 'express';
+import { createCart, getCart, createProduct, deleteCart, deleteProductCart } from '../controllers/cartsController.js';
 
 const cartRouter = express.Router(); 
 
-const manager = new CartManager();
+cartRouter.get('/:id/productos', getCart);
 
-cartRouter.get('/:id/productos', (req, res) => {
-    let result = manager.findById(req.params.id);
-    res.status(result.status).json(result);
-})
+cartRouter.post('/', createCart);
 
-cartRouter.post('/', (req, res) => {
-    let result = manager.create();
-    result.then(data => res.status(data.status).json(data));
-})
+cartRouter.post('/:id/productos', createProduct);
 
-cartRouter.post('/:id/productos', (req, res) => {
-    const { id } = req.params;
-    const newProduct = req.body;
+cartRouter.delete('/:id', deleteCart);
 
-    let result = manager.findAndCreate(id, newProduct);
-    result.then(data => res.status(data.status).json(data));
-})
+cartRouter.delete('/:id/productos/:id_prod', deleteProductCart);
 
-cartRouter.delete('/:id', (req, res) => {
-    let result = manager.delete(req.params.id);
-    res.status(result.status).json(result);
-})
-
-cartRouter.delete('/:id/productos/:id_prod', (req, res) => {
-    const { id, id_prod } = req.params;
-    let result = manager.deleteById(id, id_prod);
-
-    res.status(result.status).json(result);
-})
-
-module.exports = cartRouter;
+export default cartRouter;

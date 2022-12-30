@@ -28,5 +28,16 @@
     "photo": "www.instagram.com",
     "price": 2000,
     "stock": 11
+  },
+  {
+    "id": 4,
+    "timestamp": 1672168236068,
+    "name": "Celular Iphone 12",
+    "thumbnail": 20423,
+    "description": "Iphone 12 con cable y auriculares",
+    "code": 1234567,
+    "photo": "www.google.com",
+    "price": 2000,
+    "stock": 10
   }
 ]

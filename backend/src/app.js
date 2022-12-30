@@ -1,8 +1,13 @@
-const express = require('express');
-const productsRouter = require('./router/products.routes.js')
-const cartRouter = require('./router/cart.routes.js');
+import express from 'express';
+import productsRouter from './router/products.routes.js';
+import cartRouter from './router/cart.routes.js';
+import connectionDB from './config/db.js';
 
 const app = express();
+
+// Conexión a la base
+connectionDB();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
