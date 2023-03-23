@@ -16,7 +16,7 @@ class MongoUser {
 
     async findUser(user) {
         try {
-            const userSearch = await this.collection.findOne(user).select("-__v -createdAt -updatedAt");
+            const userSearch = await this.collection.findOne({ email: user }).select("-__v -createdAt -updatedAt");
             return userSearch;
         } catch (error) {
             console.error(error);

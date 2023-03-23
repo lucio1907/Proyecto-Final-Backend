@@ -5,7 +5,6 @@ const userSchema = mongoose.Schema({
         type: String,
         trim: true,
         min: 4,
-        max: 8,
         unique: true,
         required: true
     },
@@ -33,6 +32,7 @@ const userSchema = mongoose.Schema({
     phone: {
         type: Number,
         trim: true,
+        unique: true,
         min: 4
     },
     avatar: {
