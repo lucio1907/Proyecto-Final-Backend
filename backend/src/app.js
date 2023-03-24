@@ -62,6 +62,7 @@ initializePassport()
 
 app.use("/api/users/login", express.static("public"));
 app.use("/api/users/register", express.static("public"));
+app.use("/api/productos", express.static("public"));
 
 app.use('/api/productos', productsRouter);
 app.use('/api/carrito', cartRouter);

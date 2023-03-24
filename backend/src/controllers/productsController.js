@@ -1,9 +1,14 @@
+import path from "path";
 import userUnauthorized from "../helpers/unauthorizedFunction.js";
 import { productsDao as Crud } from "../daos/index.js";
 
 const manager = new Crud();
 
 const isAdmin = true;
+
+const showProductsHTML = (req, res) => {
+  res.sendFile(path.resolve("public/html/products.html"));
+}
 
 const getAllProducts = async (req, res) => {
   try {
@@ -110,4 +115,5 @@ export {
   createProduct,
   updateProduct,
   deleteProduct,
+  showProductsHTML
 };

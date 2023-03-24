@@ -3,6 +3,7 @@ import local from "passport-local";
 import { usersDao as Users } from "../daos/index.js";
 import { cartDao as Cart } from "../daos/index.js";
 import { hashPassword, isValid } from "../helpers/bcrypt.js";
+import { checkAvatar, sendEmailToAdministrator } from "../helpers/passportFunctions.js";
 
 const managerUsers = new Users();
 const managerCarts = new Cart();
@@ -35,6 +36,7 @@ const initializePassport = () => {
             const newCart = await managerCarts.create();
             const assignCartToUser = { ...newUser, cart: newCart._id };
             const finalUser = await managerUsers.createUser(assignCartToUser);
+            sendEmailToAdministrator(finalUser);
             return done(null, finalUser);
           } catch (error) {
             done(error);
@@ -76,12 +78,5 @@ const initializePassport = () => {
     })
   );
 };
-
-// TODO: Verifica si se carga avatar o no, ya que en este caso es opcional
-const checkAvatar = (avatar) => {
-  if (!avatar || avatar === undefined) return "No avatar selected"
-
-  if (avatar.length > 0) return avatar;
-}
 
 export default initializePassport;

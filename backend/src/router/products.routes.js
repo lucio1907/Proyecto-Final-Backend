@@ -1,7 +1,10 @@
 import express from 'express';
-import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/productsController.js';
+import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, showProductsHTML } from '../controllers/productsController.js';
+import routeValidator from '../middlewares/routeValidator.middleware.js';
 
 const productsRouter = express.Router();
+
+productsRouter.get("/products.html", routeValidator, showProductsHTML);
 
 productsRouter.get("/", getAllProducts);
 
