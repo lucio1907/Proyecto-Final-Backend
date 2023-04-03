@@ -1,4 +1,10 @@
+import dotenv from "dotenv";
 import connectionFirestore from "../db/firestoreconnection.js";
+import logConfiguration from "../helpers/log4jsConfig.js";
+
+dotenv.config();
+
+const logger = logConfiguration.getLogger(process.env.NODE_ENV);
 
 class FirestoreCartCrud {
   constructor(collectionName) {
@@ -13,7 +19,7 @@ class FirestoreCartCrud {
 
       return { id: cart.id, products: [] };
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -29,7 +35,7 @@ class FirestoreCartCrud {
         return { status: 200, response };
       }
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -43,7 +49,7 @@ class FirestoreCartCrud {
 
       return await this.db.doc(id).update(newProduct);
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -51,7 +57,7 @@ class FirestoreCartCrud {
     try {
       return await this.db.doc(id).delete();
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -69,7 +75,7 @@ class FirestoreCartCrud {
         return { status: 200, products };
       }
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 }

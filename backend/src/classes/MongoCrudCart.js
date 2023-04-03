@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import logConfiguration from "../helpers/log4jsConfig.js";
+
+const logger = logConfiguration.getLogger(process.env.NODE_ENV);
 
 class MongoCrudCart {
   constructor(collectionName, schema) {
@@ -10,7 +13,7 @@ class MongoCrudCart {
       const newCart = await this.collection.create({});
       return newCart;
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -19,7 +22,7 @@ class MongoCrudCart {
       const cart = await this.collection.findOne({ _id: id });
       return cart;
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -31,7 +34,7 @@ class MongoCrudCart {
       );
       return newProduct;
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -40,7 +43,7 @@ class MongoCrudCart {
       const cartDeleted = await this.collection.deleteOne({ _id: id });
       return cartDeleted;
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -50,7 +53,17 @@ class MongoCrudCart {
       const productDeleted = itemToDelete.products.find(product => product.id === idProduct);
       return productDeleted;
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
+    }
+  }
+
+  async updateCart(idCart) {
+    logger.log(idCart);
+    try {
+      const productsToDelete = await this.collection.findByIdAndUpdate(idCart, { $set: { products: [] } });
+      return productsToDelete;
+    } catch (error) {
+      logger.error(error);
     }
   }
 }

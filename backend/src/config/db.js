@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import logConfiguration from "../helpers/log4jsConfig.js";
+
+const logger = logConfiguration.getLogger(process.env.NODE_ENV);
 
 dotenv.config();
 
@@ -13,9 +16,9 @@ const connectionDB = async () => {
     });
 
     const url = `${connection.connection.host}:${connection.connection.port}`;
-    console.log(`MongoDB connected in ${url} 🔥`);       
+    logger.log(`MongoDB connected in ${url} 🔥`);       
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     process.exit(1);
   }
 };

@@ -1,9 +1,15 @@
 import passport from "passport";
 import local from "passport-local";
+import dotenv from "dotenv";
 import { usersDao as Users } from "../daos/index.js";
 import { cartDao as Cart } from "../daos/index.js";
 import { hashPassword, isValid } from "../helpers/bcrypt.js";
 import { checkAvatar, sendEmailToAdministrator } from "../helpers/passportFunctions.js";
+import logConfiguration from "../helpers/log4jsConfig.js";
+
+dotenv.config();
+
+const logger = logConfiguration.getLogger(process.env.NODE_ENV);
 
 const managerUsers = new Users();
 const managerCarts = new Cart();
@@ -57,7 +63,7 @@ const initializePassport = () => {
       const userID = await managerUsers.findUserById(id);
       done(null, userID._id);
     } catch (error) {
-      console.error(error);
+      logger.error(error);
     }
   });
 

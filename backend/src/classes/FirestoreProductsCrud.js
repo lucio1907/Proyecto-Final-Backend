@@ -1,4 +1,10 @@
+import dotenv from "dotenv";
 import connectionFirestore from "../db/firestoreconnection.js";
+import logConfiguration from "../helpers/log4jsConfig.js";
+
+dotenv.config();
+
+const logger = logConfiguration.getLogger(process.env.NODE_ENV);
 
 class FirestoreProductsCrud {
   constructor(collectionName) {
@@ -18,7 +24,7 @@ class FirestoreProductsCrud {
 
       return response;
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -30,7 +36,7 @@ class FirestoreProductsCrud {
 
       return response;
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -40,7 +46,7 @@ class FirestoreProductsCrud {
       const newProduct = await doc.create(body);
       return newProduct;
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -51,7 +57,7 @@ class FirestoreProductsCrud {
       
       return productUpdated;
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 
@@ -59,11 +65,11 @@ class FirestoreProductsCrud {
     try {
       const productToDelete = this.db.doc(id);
       const productDeleted = await productToDelete.delete();
-      console.log(productDeleted);
+      logger.log(productDeleted);
 
       return productDeleted;
     } catch (error) {
-      console.error(`❌ Error: ${error}`);
+      logger.error(`❌ Error: ${error}`);
     }
   }
 }

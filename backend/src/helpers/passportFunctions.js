@@ -1,5 +1,10 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import logConfiguration from "./log4jsConfig.js";
+
+dotenv.config();
+
+const logger = logConfiguration.getLogger(process.env.NODE_ENV);
 
 // TODO: Verifica si se carga avatar o no, ya que en este caso es opcional
 const checkAvatar = (avatar) => {
@@ -67,9 +72,9 @@ const sendEmailToAdministrator = (user) => {
 
     transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
-            console.error(err);
+            logger.error(err);
         } else {
-            console.log(`Email has been sended: ${info.response}`);
+            logger.log(`Email has been sended: ${info.response}`);
         }
     })
 }

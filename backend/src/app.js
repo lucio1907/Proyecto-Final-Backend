@@ -14,8 +14,11 @@ import sessionConfig from './config/sessionConfig.js';
 import homeRoutes from './router/home.routes.js';
 import routeValidator from './middlewares/routeValidator.middleware.js';
 import sessionChecker from './middlewares/sessionChecker.middleware.js';
+import logConfiguration from "./helpers/log4jsConfig.js";
 
 dotenv.config();
+
+const logger = logConfiguration.getLogger(process.env.NODE_ENV);
 
 const app = express();
 
@@ -29,14 +32,14 @@ if (process.argv[3] === "CLUSTER") {
       cluster.fork();
     }
     cluster.on("exit", (worker, code, signal) => {
-      console.log(`Worker ${worker} exit`);
+      logger.info(`Worker ${worker} exit`);
       cluster.fork();
     })
   } else {
-    app.listen(PORT, () => console.log("Server Up! 🔥"));
+    app.listen(PORT, () => logger.log("Server Up! 🔥"));
   } 
 } else {
-  app.listen(PORT, () => console.log("Server Up! 🔥"));
+  app.listen(PORT, () => logger.log("Server Up! 🔥"));
 }
 
 // Conexión a la base
@@ -46,7 +49,7 @@ switch (process.env.DB_CONNECTION) {
         break;
     case "firestore":
         connectionFirestore();
-        console.log("Firestore running 🔥");
+        logger.info("Firestore running 🔥");
         break;
     default:
         break;
@@ -63,6 +66,8 @@ initializePassport()
 app.use("/api/users/login", express.static("public"));
 app.use("/api/users/register", express.static("public"));
 app.use("/api/productos", express.static("public"));
+app.use("/api/users", express.static("public"));
+app.use("/api/carrito", express.static("public"));
 
 app.use('/api/productos', productsRouter);
 app.use('/api/carrito', cartRouter);

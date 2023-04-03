@@ -1,6 +1,12 @@
 import path from "path";
+import dotenv from "dotenv";
 import userUnauthorized from "../helpers/unauthorizedFunction.js";
 import { productsDao as Crud } from "../daos/index.js";
+import logConfiguration from "../helpers/log4jsConfig.js";
+
+dotenv.config();
+
+const logger = logConfiguration.getLogger(process.env.NODE_ENV);
 
 const manager = new Crud();
 
@@ -21,7 +27,7 @@ const getAllProducts = async (req, res) => {
 
     return res.json({ allProducts });
   } catch (error) {
-    console.error(`❌ Error: ${error}`);
+    logger.error(`❌ Error: ${error}`);
   }
 };
 
@@ -37,7 +43,7 @@ const getProductById = async (req, res) => {
 
     return res.json({ product: getProduct });
   } catch (error) {
-    console.error(`❌ Error: ${error}`);
+    logger.error(`❌ Error: ${error}`);
   }
 };
 
@@ -59,7 +65,7 @@ const createProduct = async (req, res) => {
       userUnauthorized(res);
     }
   } catch (error) {
-    console.error(`❌ Error: ${error}`);
+    logger.error(`❌ Error: ${error}`);
   }
 };
 
@@ -77,7 +83,7 @@ const updateProduct = async (req, res) => {
 
     return res.json({ msg: "Product updated!", productUpdated: doc });
   } catch (error) {
-    console.error(`❌ Error: ${error}`);
+    logger.error(`❌ Error: ${error}`);
   }
 };
 
@@ -105,7 +111,7 @@ const deleteProduct = async (req, res) => {
       userUnauthorized(res);
     }
   } catch (error) {
-    console.error(`❌ Error: ${error}`);
+    logger.error(`❌ Error: ${error}`);
   }
 };
 

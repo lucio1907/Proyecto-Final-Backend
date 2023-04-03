@@ -11,7 +11,7 @@ const sessionConfig = session({
   key: "user_sid",
   secret: process.env.SECRET_KEY,
   resave: true,
-  // cookie: { maxAge: 600000 },
+  cookie: { maxAge: 600000 },
   saveUninitialized: true,
 });
 

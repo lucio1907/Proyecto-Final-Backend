@@ -1,13 +1,30 @@
+import path from "path";
+import dotenv from "dotenv";
 import { cartDao as Crud } from "../daos/index.js";
+import { productsDao as CrudProducts } from "../daos/index.js";
+import { usersDao as CrudUsers } from "../daos/index.js";
+import sendEmail from "../helpers/sendEmailOrder.js";
+import sendMessageToUser from "../helpers/sendMessageToUser.js";
+import logConfiguration from "../helpers/log4jsConfig.js";
+
+dotenv.config();
+
+const logger = logConfiguration.getLogger(process.env.NODE_ENV);
 
 const manager = new Crud();
+const products = new CrudProducts();
+const user = new CrudUsers();
+
+const showCartHTML = (req, res) => {
+  res.sendFile(path.resolve("public/html/cart.html"));
+};
 
 const createCart = async (req, res) => {
   try {
     const newCart = await manager.create();
     res.json({ msg: "Cart Created!", newCart });
   } catch (error) {
-    console.error(`❌ Error: ${error}`);
+    logger.error(`❌ Error: ${error}`);
   }
 };
 
@@ -18,7 +35,6 @@ const getCart = async (req, res) => {
     const cart = await manager.getOneCart(id);
 
     if (process.env.DB_CONNECTION === "firestore" && cart) {
-      
       if (cart.status === 404) {
         const error = new Error("Cart not Found");
         return res.status(404).json({ msg: error.message });
@@ -34,7 +50,7 @@ const getCart = async (req, res) => {
 
     return res.json({ cart: cart });
   } catch (error) {
-    console.error(`❌ Error: ${error}`);
+    logger.error(`❌ Error: ${error}`);
   }
 };
 
@@ -57,9 +73,21 @@ const createProduct = async (req, res) => {
       return res.status(400).json({ msg: error.message });
     }
 
-    return res.json({ msg: "Product Added!", productUpdated });
+    // Restar stock y actualizar
+    if (productUpdated.stock > 0) {
+      logger.info(productUpdated);
+      const newStock = productUpdated.stock - productUpdated.quantity;
+      productUpdated.stock = newStock;
+      await products.updateProduct(productUpdated._id, productUpdated);
+      res.status(200).json({ msg: "Product added to cart" });
+    }
+
+    if (productUpdated.stock <= 0) {
+      const error = new Error("No stock");
+      return res.status(400).json({ message: error.message });
+    }
   } catch (error) {
-    console.error(`❌ Error: ${error}`);
+    logger.error(`❌ Error: ${error}`);
   }
 };
 
@@ -76,7 +104,7 @@ const deleteCart = async (req, res) => {
 
     return res.json({ msg: `Cart with id "${id}" deleted!` });
   } catch (error) {
-    console.error(`❌ Error: ${error}`);
+    logger.error(`❌ Error: ${error}`);
   }
 };
 
@@ -100,10 +128,49 @@ const deleteProductCart = async (req, res) => {
       return res.status(404).json({ msg: error.message });
     }
 
-    return res.json({ msg: `Product with id ${productDeleted._id} deleted!` });
+    productDeleted.quantity += productDeleted.stock;
+    await products.updateProduct(productDeleted._id, productDeleted);
+
+    return res.json({
+      msg: `Product with id ${productDeleted._id} has deleted!`,
+    });
   } catch (error) {
-    console.error(`❌ Error: ${error}`);
+    logger.error(`❌ Error: ${error}`);
   }
 };
 
-export { createCart, getCart, createProduct, deleteCart, deleteProductCart };
+const buyProduct = async (req, res) => {
+  const userID = req.session.passport.user;
+
+  try {
+    const currentUser = await user.findUserById(userID);
+    const getCart = await manager.getOneCart(currentUser.cart);
+    const cartID = getCart._id;
+
+    const cartUpdated = await manager.updateCart(cartID);
+
+    if (cartUpdated.products.length === 0) {
+      const error = new Error("There are not products in your cart, please add one if you really want to make an order");
+      return res.status(400).json({ message: error.message });
+    }
+  
+    const order = getCart.products;
+    
+    sendEmail(currentUser, order);
+    sendMessageToUser(currentUser);
+
+    res.json({ status: "Buyed", message: "We'll send you an email with your order information" });
+  } catch (error) {
+    logger.error(error);
+  }
+};
+
+export {
+  createCart,
+  getCart,
+  createProduct,
+  deleteCart,
+  deleteProductCart,
+  showCartHTML,
+  buyProduct,
+};

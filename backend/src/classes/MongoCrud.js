@@ -41,10 +41,10 @@ class MongoCrud {
         }
     }
 
-    async update(id, doc) {
+    async updateProduct(id, doc) {
+        console.log(id);
         try {
             const productUpdated = await this.collection.findByIdAndUpdate(id, doc)
-            console.log(productUpdated);
             return productUpdated;
         } catch (error) {
             console.error(`❌ Error: ${error}`);
