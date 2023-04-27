@@ -37,11 +37,11 @@ Start the server
 You can see the Deployment in: https://glitch.com/edit/#!/continuous-salty-dogsled
 
 
-## Technologies (for the moment) 🔧
+## Technologies 🔧
 
 **Server:** Node, Express
 
-**Databases:** MongoDB, Firebase
+**Database:** MongoDB
 
 
 
