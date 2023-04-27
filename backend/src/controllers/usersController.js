@@ -1,34 +1,24 @@
 import { usersDao as User } from "../daos/index.js";
-import path from "path";
+import dotenv from "dotenv";
 import logConfiguration from "../helpers/log4jsConfig.js";
+
+dotenv.config();
 
 const logger = logConfiguration.getLogger(process.env.NODE_ENV);
 
 const manager = new User();
-
-const showLoginHTML = (req, res) => {
-  return res.status(200).sendFile(path.resolve("public/html/login.html"));
-};
 
 // Si el usuario se loguea que devuelva un mensaje
 const loginUser = (req, res) => {
   res.status(300).json({ message: "Logged in" });
 };
 
-const showRegisterHTML = (req, res) => {
-  res.sendFile(path.resolve("public/html/register.html"));
-};
-
 const newUser = async (req, res) => {
-  res.status(201).json({ message: "User Created!" });
+  res.status(201).json({ msg: "User created!" });
 };
 
-const showRegisterErrorHTML = (req, res) => {
-  res.sendFile(path.resolve("public/html/registerError.html"));
-};
-
-const loginError = (req, res) => {
-  res.sendFile(path.resolve("public/html/loginError.html"));
+const showRegisterError = (req, res) => {
+  res.status(400).json({ message: "That user already exists" })
 };
 
 // Borra la session para desloguear al usuario
@@ -39,10 +29,6 @@ const logout = async (req, res) => {
   } catch (error) {
     logger.error(error);
   }
-};
-
-const showUserDescriptionHTML = (req, res) => {
-  res.sendFile(path.resolve("public/html/userDescription.html"));
 };
 
 // Obtiene el usuario actual
@@ -59,12 +45,8 @@ const userDescription = async (req, res) => {
 
 export {
   newUser,
-  showLoginHTML,
   loginUser,
   logout,
-  loginError,
-  showRegisterHTML,
-  showRegisterErrorHTML,
-  showUserDescriptionHTML,
+  showRegisterError,
   userDescription,
 };

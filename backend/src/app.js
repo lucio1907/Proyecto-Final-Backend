@@ -1,17 +1,16 @@
 import os from "os";
 import express from 'express';
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import productsRouter from './router/products.routes.js';
 import cartRouter from './router/cart.routes.js';
 import connectionDB from './config/db.js';
-import connectionFirestore from './db/firestoreconnection.js';
 import userRoutes from './router/users.routes.js';
 import dotenv from "dotenv";
 import cluster from "cluster";
 import passport from 'passport';
 import initializePassport from './config/passport.js';
-import sessionConfig from './config/sessionConfig.js';
-import homeRoutes from './router/home.routes.js';
+import sessionConfig from "./config/sessionConfig.js";
 import routeValidator from './middlewares/routeValidator.middleware.js';
 import sessionChecker from './middlewares/sessionChecker.middleware.js';
 import logConfiguration from "./helpers/log4jsConfig.js";
@@ -36,10 +35,10 @@ if (process.argv[3] === "CLUSTER") {
       cluster.fork();
     })
   } else {
-    app.listen(PORT, () => logger.log("Server Up! 🔥"));
+    app.listen(PORT, () => console.log("Server Up! 🔥"));
   } 
 } else {
-  app.listen(PORT, () => logger.log("Server Up! 🔥"));
+  app.listen(PORT, () => console.log("Server Up! 🔥"));
 }
 
 // Conexión a la base
@@ -47,21 +46,19 @@ switch (process.env.DB_CONNECTION) {
     case "mongodb":
         connectionDB();
         break;
-    case "firestore":
-        connectionFirestore();
-        logger.info("Firestore running 🔥");
-        break;
     default:
         break;
 }
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+initializePassport()
+app.use(cors());
 app.use(cookieParser());
 app.use(sessionConfig);
 app.use(passport.initialize());
 app.use(passport.session());
-initializePassport()
+
 
 app.use("/api/users/login", express.static("public"));
 app.use("/api/users/register", express.static("public"));
@@ -72,7 +69,6 @@ app.use("/api/carrito", express.static("public"));
 app.use('/api/productos', productsRouter);
 app.use('/api/carrito', cartRouter);
 app.use('/api/users', userRoutes);
-app.use('/home', homeRoutes);
 
 app.get("/", routeValidator, sessionChecker, (req, res) => {
     res.status(308).redirect("/api/users/login"); 

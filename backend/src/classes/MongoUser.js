@@ -13,16 +13,25 @@ class MongoUser {
 
     async createUser(newUserData) {
         try {
-            const newUser = await this.collection.create(newUserData);
-            return newUser;
+            const findUser = await this.collection.findOne({ username: newUserData.username });
+            
+            if (findUser) {
+                return { status: 400 }
+            } else {
+                const newUser = await this.collection.create(newUserData);
+                return newUser;
+            }
         } catch (error) {
-            logger.error(error);
+            console.error(error);
+            if (error.code === 11000) {
+                return { error: "This user already exists", status: 400 }
+            }
         }
     }
 
     async findUser(user) {
         try {
-            const userSearch = await this.collection.findOne({ email: user }).select("-__v -createdAt -updatedAt");
+            const userSearch = await this.collection.findOne({ email: user })
             return userSearch;
         } catch (error) {
             logger.error(error);
@@ -35,6 +44,15 @@ class MongoUser {
             return userSearch;
         } catch (error) {
             logger.error(error);
+        }
+    }
+
+    async findByEmail(userEmail) {
+        try {
+            const searchEmail = await this.collection.findOne({ email: userEmail });
+            return searchEmail
+        } catch (error) {
+            console.error(error);
         }
     }
 }

@@ -1,15 +1,175 @@
-[2023-04-03T12:22:15.514] [INFO] PROD - Server Up! 🔥
-[2023-04-03T12:23:16.773] [INFO] PROD - Server Up! 🔥
-[2023-04-03T12:24:04.538] [INFO] PROD - Server Up! 🔥
-[2023-04-03T12:25:32.473] [INFO] PROD - Server Up! 🔥
-[2023-04-03T12:26:01.114] [INFO] PROD - Server Up! 🔥
-[2023-04-03T12:26:19.208] [INFO] PROD - Server Up! 🔥
-[2023-04-03T12:26:19.762] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-01.bw59mzj.mongodb.net:27017 🔥
-[2023-04-03T12:28:03.653] [INFO] PROD - Server Up! 🔥
-[2023-04-03T12:28:04.269] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-02.bw59mzj.mongodb.net:27017 🔥
-[2023-04-03T12:29:31.039] [INFO] PROD - Server Up! 🔥
-[2023-04-03T12:29:31.778] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-00.bw59mzj.mongodb.net:27017 🔥
-[2023-04-03T12:30:16.340] [INFO] PROD - Server Up! 🔥
-[2023-04-03T12:30:16.898] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-00.bw59mzj.mongodb.net:27017 🔥
-[2023-04-03T12:31:00.192] [INFO] PROD - Server Up! 🔥
-[2023-04-03T12:31:00.832] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-02.bw59mzj.mongodb.net:27017 🔥
+[2023-04-27T12:35:21.660] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-00.bw59mzj.mongodb.net:27017 🔥
+[2023-04-27T12:35:24.689] [ERROR] PROD - MongoServerError: E11000 duplicate key error collection: Ecommerce.users index: username_1 dup key: { username: "lucio1907200122" }
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\operations\insert.js:53:33
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection_pool.js:307:25
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:242:9)
+    at MessageStream.<anonymous> (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:61:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:125:16)
+    at MessageStream._write (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12) {
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'lucio1907200122' },
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2023-04-27T12:35:48.540] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-00.bw59mzj.mongodb.net:27017 🔥
+[2023-04-27T12:35:49.333] [ERROR] PROD - MongoServerError: E11000 duplicate key error collection: Ecommerce.users index: username_1 dup key: { username: "lucio1907200122" }
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\operations\insert.js:53:33
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection_pool.js:307:25
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:242:9)
+    at MessageStream.<anonymous> (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:61:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:125:16)
+    at MessageStream._write (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12) {
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'lucio1907200122' },
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2023-04-27T12:41:06.616] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-02.bw59mzj.mongodb.net:27017 🔥
+[2023-04-27T12:41:08.780] [ERROR] PROD - MongoServerError: E11000 duplicate key error collection: Ecommerce.users index: username_1 dup key: { username: "lucio1907200122" }
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\operations\insert.js:53:33
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection_pool.js:307:25
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:242:9)
+    at MessageStream.<anonymous> (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:61:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:125:16)
+    at MessageStream._write (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12) {
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'lucio1907200122' },
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2023-04-27T12:41:25.593] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-02.bw59mzj.mongodb.net:27017 🔥
+[2023-04-27T12:41:26.159] [ERROR] PROD - MongoServerError: E11000 duplicate key error collection: Ecommerce.users index: username_1 dup key: { username: "lucio1907200122" }
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\operations\insert.js:53:33
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection_pool.js:307:25
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:242:9)
+    at MessageStream.<anonymous> (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:61:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:125:16)
+    at MessageStream._write (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12) {
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'lucio1907200122' },
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2023-04-27T12:41:45.967] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-02.bw59mzj.mongodb.net:27017 🔥
+[2023-04-27T12:42:29.872] [ERROR] PROD - Error: Users validation failed: cart: Path `cart` is required.
+    at ValidationError.inspect (E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\error\validation.js:50:26)
+    at formatValue (node:internal/util/inspect:806:19)
+    at inspect (node:internal/util/inspect:365:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2292:40)
+    at Object.format (node:internal/util/inspect:2149:10)
+    at basicLayout (E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\layouts.js:65:52)
+    at app (E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\appenders\file.js:98:23)
+    at E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\log4js.js:42:21) {
+  errors: {
+    cart: ValidatorError: Path `cart` is required.
+        at validate (E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaString.SchemaType.doValidate (E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\schematype.js:1330:7)
+        at E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\document.js:2903:18
+        at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'cart',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'Users validation failed'
+}
+[2023-04-27T12:43:11.155] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-00.bw59mzj.mongodb.net:27017 🔥
+[2023-04-27T12:43:19.182] [ERROR] PROD - Error: Users validation failed: cart: Path `cart` is required.
+    at ValidationError.inspect (E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\error\validation.js:50:26)
+    at formatValue (node:internal/util/inspect:806:19)
+    at inspect (node:internal/util/inspect:365:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2292:40)
+    at Object.format (node:internal/util/inspect:2149:10)
+    at basicLayout (E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\layouts.js:65:52)
+    at app (E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\appenders\file.js:98:23)
+    at E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\log4js.js:42:21) {
+  errors: {
+    cart: ValidatorError: Path `cart` is required.
+        at validate (E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaString.SchemaType.doValidate (E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\schematype.js:1330:7)
+        at E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\document.js:2903:18
+        at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'cart',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'Users validation failed'
+}
+[2023-04-27T12:43:47.821] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-02.bw59mzj.mongodb.net:27017 🔥
+[2023-04-27T12:43:55.490] [ERROR] PROD - Error: Users validation failed: cart: Path `cart` is required.
+    at ValidationError.inspect (E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\error\validation.js:50:26)
+    at formatValue (node:internal/util/inspect:806:19)
+    at inspect (node:internal/util/inspect:365:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2292:40)
+    at Object.format (node:internal/util/inspect:2149:10)
+    at basicLayout (E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\layouts.js:65:52)
+    at app (E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\appenders\file.js:98:23)
+    at E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (E:\ProyectoFinalBackend\backend\node_modules\log4js\lib\log4js.js:42:21) {
+  errors: {
+    cart: ValidatorError: Path `cart` is required.
+        at validate (E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaString.SchemaType.doValidate (E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\schematype.js:1330:7)
+        at E:\ProyectoFinalBackend\backend\node_modules\mongoose\lib\document.js:2903:18
+        at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'cart',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'Users validation failed'
+}
+[2023-04-27T12:44:22.329] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-00.bw59mzj.mongodb.net:27017 🔥
+[2023-04-27T12:44:28.125] [ERROR] PROD - MongoServerError: E11000 duplicate key error collection: Ecommerce.users index: username_1 dup key: { username: "lucio1907200122" }
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\operations\insert.js:53:33
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection_pool.js:307:25
+    at E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:242:9)
+    at MessageStream.<anonymous> (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:61:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:125:16)
+    at MessageStream._write (E:\ProyectoFinalBackend\backend\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12) {
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'lucio1907200122' },
+  [Symbol(errorLabels)]: Set(0) {}
+}[2023-04-27T18:48:56.312] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-01.bw59mzj.mongodb.net:27017 🔥
+[2023-04-27T18:49:02.699] [INFO] PROD - MongoDB connected in ac-3scaedc-shard-00-01.bw59mzj.mongodb.net:27017 🔥

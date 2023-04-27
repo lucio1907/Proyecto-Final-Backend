@@ -1,8 +1,6 @@
 import dotenv from "dotenv";
 import MongoCrudExtended from "../daos/products/MongoCrudExtended.js";
 import MongoCrudCartExtended from "../daos/cart/MongoCrudCartExtended.js";
-import FirestoreProductsCrudExtended from "../daos/products/FirestoreProductsCrudExtended.js";
-import FirestoreCartCrudExtended from "../daos/cart/FirestoreCartCrudExtended.js";
 import MongoUserExtended from "./users/MongoUserExtended.js";
 
 dotenv.config();
@@ -17,12 +15,6 @@ switch (process.env.DB_CONNECTION) {
     cartDao = MongoCrudCartExtended;
     usersDao = MongoUserExtended;
     break;
-
-  case "firestore":
-    productsDao = FirestoreProductsCrudExtended;
-    cartDao = FirestoreCartCrudExtended;
-    break;
-
   default:
     break;
 }

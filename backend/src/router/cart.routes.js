@@ -1,9 +1,7 @@
 import express from 'express';
-import { createCart, getCart, createProduct, deleteCart, deleteProductCart, showCartHTML, buyProduct } from '../controllers/cartsController.js';
+import { createCart, getCart, createProduct, deleteCart, deleteProductCart, buyProduct } from '../controllers/cartsController.js';
 
 const cartRouter = express.Router(); 
-
-cartRouter.get("/cartView", showCartHTML);
 
 cartRouter.get('/:id/productos', getCart);
 

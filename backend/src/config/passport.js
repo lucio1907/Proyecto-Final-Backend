@@ -39,11 +39,18 @@ const initializePassport = () => {
 
           // TODO: Insertar carrito al usuario y guardarlo en la base de datos
           try {
-            const newCart = await managerCarts.create();
-            const assignCartToUser = { ...newUser, cart: newCart._id };
-            const finalUser = await managerUsers.createUser(assignCartToUser);
-            sendEmailToAdministrator(finalUser);
-            return done(null, finalUser);
+            const existingUser = await managerUsers.findByEmail(newUser.email);
+            if (existingUser) {
+              // Si existe el usuario que retorne un error
+              return done(null);
+            } else {
+              // Si el usuario no existe que asigne un carrito y se cree el usuario
+              const cart = await managerCarts.create();
+              const assignCartToUser = { ...newUser, cart: cart.newCart._id };
+              const finalUser = await managerUsers.createUser(assignCartToUser);
+              sendEmailToAdministrator(finalUser);
+              return done(null, finalUser);
+            }
           } catch (error) {
             done(error);
           }
@@ -53,19 +60,6 @@ const initializePassport = () => {
       }
     )
   );
-
-  passport.serializeUser((user, done) => {
-    done(null, user._id);
-  });
-
-  passport.deserializeUser(async (id, done) => {
-    try {
-      const userID = await managerUsers.findUserById(id);
-      done(null, userID._id);
-    } catch (error) {
-      logger.error(error);
-    }
-  });
 
   // TODO: Verifica que la cuenta exista en la base de datos y compara la contraseña enviada con la ya cargada en la BD para hacer el logueo
   passport.use(
@@ -83,6 +77,20 @@ const initializePassport = () => {
       }
     })
   );
+
+  passport.serializeUser((user, done) => {
+    done(null, user._id);
+  });
+
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const userID = await managerUsers.findUserById(id);
+      done(null, userID._id);
+    } catch (error) {
+      logger.error(error);
+    }
+  });
+
 };
 
 export default initializePassport;
